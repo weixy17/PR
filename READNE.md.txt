@@ -1,0 +1,56 @@
+单特征单模型下的最好结果：对ECFP特征进行ADASYN数据扩增后使用SVM进行分类。
+	从头训练：
+		命令行：	cd /submit_test
+			python ECFP_ADASYN_SVM_train.py
+		所需要的安装包：numpy, joblib, imblearn, thundersvm
+			numpy安装命令：pip install numpy
+			thundersvm安装命令：pip install thundersvm (环境要求：CUDA 9.0;)
+			   		若CUDA版本大于9.0，安装命令如下：
+						git clone https://github.com/Xtra-Computing/thundersvm.git
+						cd thundersvm
+						mkdir build && cd build && cmake .. && make -j
+						cd ../python
+						sudo python3 setup.py install
+			joblib安装命令：pip install joblib
+			imblearn安装命令：pip install imblearn
+	用我们训练好的模型直接测试：
+		命令行：  cd /submit_test
+			python ECFP_ADASYN_SVM.py
+		所需要的安装包：numpy, joblib
+			numpy安装命令：pip install numpy
+			joblib安装命令：pip install joblib
+
+
+此外，测试其他特征下的其他模型
+1. ECFP特征使用C4.5决策树：
+	命令行：   cd /submit_test
+		python ECFP_C45.py
+	所需要的安装包：numpy,scipy
+		scipy安装命令：pip install scipy
+2. ECFP特征使用SVM分类后再使用boosting算法提高性能：
+	命令行：   cd /submit_test
+		python ECFP_ensemble.py
+	所需要的安装包：numpy,joblib
+		joblib安装命令：pip install joblib
+3.IMAGE特征使用ADASYN扩增后进行PCA降维，再使用SVM算法分类
+	命令行：   cd /submit_test
+		python IMAGE_ADASYN_PCA_SVM.py
+	所需要的安装包：numpy,joblib,scipy
+		joblib安装命令：pip install joblib
+		scipy安装命令：pip install scipy
+4.IMAGE特征使用CNN分类
+	命令行：   cd /submit_test
+		python IMAGE_CNN.py
+	所需要的安装包：numpy,torch
+		torch安装命令可根据CUDA版本参考pytorch官网
+4.IMAGE特征使用MLP分类
+	命令行：   cd /submit_test/IMAGE_MLP
+		python test.py
+	所需要的安装包：numpy,scipy
+		scipy安装命令：pip install scipy
+5.SMILES特征用SVM分类
+	命令行：   cd /submit_test
+		python descriptors_final.py
+	所需要的安装包：numpy,imblearn,sklearn
+		sklearn安装命令：pip install scikit-learn
+		imblearn安装命令：pip install imblearn
